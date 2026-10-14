@@ -5,11 +5,12 @@
   "type": "module",
   "private": true,
   "license": "MIT",
-  "engines": { "node": ">=20" },
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "fetch-dataset": "node scripts/fetch-dataset.mjs",
     "run": "node run.mjs",
-    "rating-page": "python3 scripts/rating_page.py",
     "grading-sheets": "python3 scripts/grading_sheets.py",
     "summarize": "python3 scripts/summarize.py"
   }
