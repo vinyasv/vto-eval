@@ -1,0 +1,223 @@
+<title>VTO Model Eval</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: a single reading column for the verdict and notes, widening to full width for the comparison tables and the failure contact sheet. */
+:root {
+  --bg: #f3f4f2;
+  --surface: #ffffff;
+  --ink: #1b1d1c;
+  --muted: #6a6f6c;
+  --line: #d9dcd8;
+  --accent: #2b5d8a;
+  --accent-soft: #dbe6f0;
+  --bad: #b3261e;
+  --bad-soft: #f6dcda;
+  --good: #2f7a4b;
+  --good-soft: #dcefe3;
+  --font-ui: "Schibsted Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-data: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #141716; --surface: #1d2120; --ink: #e8ebe9; --muted: #9aa19d; --line: #333937;
+    --accent: #7fb0dc; --accent-soft: #23384b; --bad: #f08a82; --bad-soft: #43201e; --good: #7cc89a; --good-soft: #1f3a2a;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #141716; --surface: #1d2120; --ink: #e8ebe9; --muted: #9aa19d; --line: #333937;
+  --accent: #7fb0dc; --accent-soft: #23384b; --bad: #f08a82; --bad-soft: #43201e; --good: #7cc89a; --good-soft: #1f3a2a;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font-ui); font-size: 15px; line-height: 1.55; padding-inline: 16px; padding-block: 32px 64px; }
+.wrap { max-width: 1180px; margin: 0 auto; display: grid; gap: 40px; }
+.prose { max-width: 72ch; display: grid; gap: 12px; }
+h1, h2, h3 { margin: 0; text-wrap: balance; }
+h1 { font-size: 2rem; letter-spacing: -0.02em; line-height: 1.15; }
+h2 { font-size: 1.25rem; letter-spacing: -0.01em; }
+h3 { font-size: 1rem; }
+p { margin: 0; }
+.eyebrow { font-family: var(--font-data); font-size: 0.75rem; color: var(--muted); letter-spacing: 0.04em; }
+.muted { color: var(--muted); }
+.mono { font-family: var(--font-data); font-variant-numeric: tabular-nums; }
+section { display: grid; gap: 16px; }
+
+.verdict { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 20px; display: grid; gap: 14px; }
+.verdict .pick { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+.verdict .pick > div { display: grid; gap: 6px; align-content: start; min-width: 0; }
+.tag { display: inline-block; font-size: 0.7rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.07em; padding: 2px 8px; border-radius: 99px; background: var(--accent-soft); color: var(--accent); justify-self: start; }
+.tag.good { background: var(--good-soft); color: var(--good); }
+.tag.bad { background: var(--bad-soft); color: var(--bad); }
+
+.tablewrap { overflow-x: auto; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; }
+table { border-collapse: collapse; width: 100%; font-size: 0.85rem; }
+th, td { padding: 9px 12px; border-bottom: 1px solid var(--line); text-align: right; white-space: nowrap; }
+tr:last-child td { border-bottom: 0; }
+th:first-child, td:first-child { text-align: left; }
+th { font-weight: 500; color: var(--muted); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; }
+td.best { color: var(--good); font-weight: 600; }
+td.worst { color: var(--bad); }
+td.note { text-align: left; white-space: normal; min-width: 260px; color: var(--muted); }
+.legend { font-size: 0.8rem; color: var(--muted); }
+
+.models { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
+.model { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 16px; display: grid; gap: 8px; align-content: start; }
+.model ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
+
+.gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 16px; }
+.fail { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 12px; display: grid; gap: 10px; align-content: start; }
+.fail .imgs { display: grid; grid-template-columns: 1fr 1fr 1.4fr; gap: 6px; align-items: start; }
+.fail img { width: 100%; border-radius: 4px; display: block; }
+.fail .blocked { border: 1px dashed var(--bad); color: var(--bad); background: var(--bad-soft); border-radius: 4px; padding: 12px; font-size: 0.8rem; }
+.fail .head { display: flex; justify-content: space-between; gap: 8px; align-items: baseline; }
+.cap { font-size: 0.68rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+
+details { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; }
+summary { cursor: pointer; padding: 14px 16px; font-weight: 500; }
+summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+details .tablewrap { border: 0; border-top: 1px solid var(--line); border-radius: 0 0 10px 10px; }
+.u { color: var(--bad); font-weight: 600; }
+</style>
+
+<div class="wrap">
+  <header class="prose">
+    <span class="eyebrow">VIRTUAL TRY-ON · RUN v1 · PROMPT v1 · 14 OCT 2026</span>
+    <h1>VTO Model Eval</h1>
+    <p class="muted">Five OpenRouter image models, 20 person × garment pairs, 100 outputs. Each output was graded 1–5 on five dimensions and marked usable or unusable. Grading was blind: outputs were shuffled and labelled A–E, and the model key was opened only after all 100 grades were recorded.</p>
+  </header>
+
+  <section class="verdict">
+    <h2>Findings</h2>
+    <div class="pick">
+      <div><span class="tag good">Best value</span><h3>Seedream 5.0 Flash</h3><p>19 of 20 usable at $0.018, the lowest cost per usable image. It's generally available and reproduced garment details well. Its one unusable output turned a man around because the product shot showed the back of the tee, and a prompt fix should cover that. Its other weakness is square output on 4:5 photos, which twice distorted body shape.</p></div>
+      <div><span class="tag">Best quality</span><h3>Hy Image 3.5 Preview</h3><p>The only model with 20 of 20 usable, and a perfect 5.00 on identity. At $0.024 and about 17s it costs about the same as Seedream. It's a preview release, so re-test it at general availability.</p></div>
+      <div><span class="tag bad">Not recommended</span><h3>FLUX.3, Gemini Flash Lite, Klein</h3><p>FLUX.3 matches Hy on quality but takes 70s and refused a sheer blouse as adult content. Gemini is the fastest (7s) but changed the person's pose, framing or body in 10 of 20 outputs, and replaced one person entirely. Klein is cheap and fast but only 14 of 20 were usable, because it copies extra clothing from the product photo.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Scores, cost and latency</h2>
+    <div class="tablewrap"><table id="summary"></table></div>
+    <p class="legend">Quality columns are mean grades out of 5 (FLUX.3 averages its 19 returned images; the blocked one counts as unusable). "Clean" means all five grades were 5. Latency is end to end with 4 requests running at once per model. $/usable is total spend divided by usable outputs. Green marks the best value in each column and red the worst.</p>
+  </section>
+
+  <section>
+    <h2>What each model got wrong</h2>
+    <div class="models">
+      <div class="model"><h3>Seedream 5.0 Flash</h3><ul>
+        <li>pair01: turned the man to face away, copying the back view of the tee.</li>
+        <li>Returns square images for 4:5 photos. In pair14 and pair16 the reframing also changed the body, making it heavier in one and slimmer in the other.</li>
+        <li>Otherwise reproduced garment details faithfully: logos, the corduroy collar, lace, embroidery.</li>
+      </ul></div>
+      <div class="model"><h3>Hy Image 3.5 Preview</h3><ul>
+        <li>No unusable outputs, and identity was preserved in every image.</li>
+        <li>Made small garment errors: a blue shirt added under the sweater vest (pair07), the tee print a little small (pair04), jeans a lighter wash than the product (pair09), the red dress slightly orange (pair14).</li>
+      </ul></div>
+      <div class="model"><h3>Gemini 3.1 Flash Lite</h3><ul>
+        <li>pair17: replaced the woman in the saree with a different, younger person and added the product photo's skirt.</li>
+        <li>pair11: slimmed the body and copied the product model's pose.</li>
+        <li>Changed pose, framing or body shape in 10 of 20 outputs, for example turning the side-profile woman to face the camera (pair20) and cropping the top of a head (pair19).</li>
+      </ul></div>
+      <div class="model"><h3>FLUX.3 Image</h3><ul>
+        <li>pair13: blocked twice as "sexual or adult content". The product was a sheer blouse.</li>
+        <li>pair15: rendered the olive jumpsuit in taupe.</li>
+        <li>Preserved identity and scene almost perfectly, but at 70s p50.</li>
+      </ul></div>
+      <div class="model"><h3>FLUX.2 Klein 4B</h3><ul>
+        <li>Added clothing that wasn't the product: a blazer (pair01), a jacket (pair07), a sash (pair20).</li>
+        <li>pair17: swapped the saree for shorts and changed the woman.</li>
+        <li>pair02 and pair13: changed the person's face and body.</li>
+      </ul></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Unusable outputs</h2>
+    <p class="muted">Every output graded unusable, with the inputs alongside.</p>
+    <div class="gallery" id="gallery"></div>
+  </section>
+
+  <section>
+    <h2>All grades</h2>
+    <details id="allgrades"><summary>Show all 100 grades with notes</summary><div class="tablewrap"><table id="grades"></table></div></details>
+  </section>
+
+  <section class="prose">
+    <h2>Method and limits</h2>
+    <p><b>Prompt.</b> Every model got the same prompt (v1, in <span class="mono">prompt.mjs</span>): image 1 is the person, image 2 is the garment, copy the garment exactly, ignore everything else in the product photo, place it by category, and keep the face, body, pose, background and framing unchanged.</p>
+    <p><b>Grading.</b> Claude graded every output, inspecting each image at full resolution where detail mattered: print text, faces, body shape. One grader and one sample per model per pair means small differences of about 0.1 in mean score are noise. The usable counts and the failure types are the reliable signal.</p>
+    <p><b>Dataset.</b> 20 Unsplash photos of people and 20 garment photos, deliberately including hard cases: back-view and mannequin product shots, a sheer blouse, a saree, a hijab, plus-size bodies, seated and side-profile poses. Real catalog images are usually cleaner, so production failure rates should be lower.</p>
+    <p><b>Next.</b> Add two lines to the prompt: keep the person facing the same direction, and add no clothing other than the garment from image 2. Then rerun Seedream and Hy with 3 samples on the hard pairs to confirm the fix and measure variance.</p>
+  </section>
+</div>
+
+<script>
+const DATA = /*__DATA__*/null;
+const DIMS = [["garment", "Garment"], ["identity", "Identity"], ["scene", "Scene"], ["fit", "Fit"], ["artifacts", "Artifacts"]];
+const el = (tag, attrs = {}, ...kids) => {
+  const n = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs)) n.setAttribute(k, v);
+  for (const k of kids.flat()) if (k != null) n.append(k);
+  return n;
+};
+
+// Summary table with best/worst per column.
+(function () {
+  const S = DATA.summary;
+  const cols = [
+    ["Usable", (s) => s.usable, (v) => `${v}/20`, "max"],
+    ["Clean", (s) => s.perfect, (v) => `${v}/20`, "max"],
+    ["Quality", (s) => s.mean, (v) => v.toFixed(2), "max"],
+    ...DIMS.map(([d, n]) => [n, (s) => s.means[d], (v) => v.toFixed(2), "max"]),
+    ["p50 s", (s) => s.p50, (v) => v.toFixed(1), "min"],
+    ["p90 s", (s) => s.p90, (v) => v.toFixed(1), "min"],
+    ["$ / image", (s) => s.cost, (v) => "$" + v.toFixed(3), "min"],
+    ["$ / usable", (s) => s.per_usable, (v) => "$" + v.toFixed(3), "min"],
+  ];
+  const t = document.getElementById("summary");
+  t.append(el("tr", {}, el("th", {}, "Model"), cols.map(([h]) => el("th", {}, h))));
+  for (const s of S) {
+    t.append(el("tr", { class: "mono" }, el("td", {}, s.n), cols.map(([, get, fmt, dir]) => {
+      const vals = S.map(get), v = get(s);
+      const best = dir === "max" ? Math.max(...vals) : Math.min(...vals);
+      const worst = dir === "max" ? Math.min(...vals) : Math.max(...vals);
+      return el("td", { class: v === best ? "best" : v === worst ? "worst" : "" }, fmt(v));
+    })));
+  }
+})();
+
+// Failure gallery.
+(function () {
+  const g = document.getElementById("gallery");
+  for (const f of DATA.gallery) {
+    g.append(el("div", { class: "fail" },
+      el("div", { class: "head" }, el("h3", { class: "mono" }, f.pair), el("span", { class: "tag bad" }, f.model)),
+      el("div", { class: "imgs" },
+        el("figure", { style: "margin:0" }, el("img", { src: f.person, alt: "Person" }), el("figcaption", { class: "cap" }, "Person")),
+        el("figure", { style: "margin:0" }, el("img", { src: f.garment, alt: "Garment" }), el("figcaption", { class: "cap" }, "Garment")),
+        f.out ? el("figure", { style: "margin:0" }, el("img", { src: f.out, alt: `${f.model} output` }), el("figcaption", { class: "cap" }, "Output"))
+              : el("div", { class: "blocked" }, "No image. Blocked by provider moderation.")),
+      el("p", { class: "muted" }, f.note)));
+  }
+})();
+
+// Full grades table, rendered on first open.
+document.getElementById("allgrades").addEventListener("toggle", function once(e) {
+  if (!e.target.open) return;
+  e.target.removeEventListener("toggle", once);
+  const t = document.getElementById("grades");
+  t.append(el("tr", {}, ["Pair", "Model", ...DIMS.map(([, n]) => n), "Usable", "Note"].map((h) => el("th", {}, h))));
+  const order = Object.fromEntries(DATA.summary.map((s, i) => [s.n, i]));
+  const rows = [...DATA.rows].sort((a, b) => a.pair.localeCompare(b.pair) || order[a.model] - order[b.model]);
+  for (const r of rows) {
+    t.append(el("tr", {},
+      el("td", { class: "mono" }, r.pair), el("td", {}, r.model),
+      DIMS.map(([d]) => el("td", { class: "mono" }, r.blocked ? "–" : String(r[d]))),
+      el("td", { class: r.unusable ? "u" : "" }, r.unusable ? "No" : "Yes"),
+      el("td", { class: "note" }, r.note)));
+  }
+});
+</script>

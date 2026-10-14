@@ -1,0 +1,122 @@
+[
+  {
+    "id": "pair01",
+    "person": "p01",
+    "garment": "g03",
+    "tests": "graphic tee over existing tee; logo fidelity"
+  },
+  {
+    "id": "pair02",
+    "person": "p02",
+    "garment": "g11",
+    "tests": "tux blazer over dress shirt"
+  },
+  {
+    "id": "pair03",
+    "person": "p03",
+    "garment": "g09",
+    "tests": "denim jacket layered over oversized tee"
+  },
+  {
+    "id": "pair04",
+    "person": "p04",
+    "garment": "g04",
+    "tests": "vertical text print legibility"
+  },
+  {
+    "id": "pair05",
+    "person": "p05",
+    "garment": "g08",
+    "tests": "hoodie on plus-size body"
+  },
+  {
+    "id": "pair06",
+    "person": "p06",
+    "garment": "g06",
+    "tests": "button shirt replacing polo"
+  },
+  {
+    "id": "pair07",
+    "person": "p07",
+    "garment": "g07",
+    "tests": "sweater vest from small hanger shot (cropped)"
+  },
+  {
+    "id": "pair08",
+    "person": "p08",
+    "garment": "g12",
+    "tests": "long coat on seated person"
+  },
+  {
+    "id": "pair09",
+    "person": "p09",
+    "garment": "g19",
+    "tests": "jeans from folded flat lay replacing jeans"
+  },
+  {
+    "id": "pair10",
+    "person": "p10",
+    "garment": "g10",
+    "tests": "leather jacket from wrinkled flat lay, dark bg"
+  },
+  {
+    "id": "pair11",
+    "person": "p11",
+    "garment": "g13",
+    "tests": "shirt dress on plus-size body"
+  },
+  {
+    "id": "pair12",
+    "person": "p12",
+    "garment": "g18",
+    "tests": "trousers onto bare legs"
+  },
+  {
+    "id": "pair13",
+    "person": "p13",
+    "garment": "g05",
+    "tests": "sheer blouse under an open blazer while walking"
+  },
+  {
+    "id": "pair14",
+    "person": "p14",
+    "garment": "g16",
+    "tests": "dress from mannequin with busy bg, replacing trousers"
+  },
+  {
+    "id": "pair15",
+    "person": "p15",
+    "garment": "g17",
+    "tests": "jumpsuit from back-view reference; keep hijab"
+  },
+  {
+    "id": "pair16",
+    "person": "p16",
+    "garment": "g14",
+    "tests": "slip dress on plus-size body with arms raised"
+  },
+  {
+    "id": "pair17",
+    "person": "p17",
+    "garment": "g01",
+    "tests": "striped tee replacing saree blouse"
+  },
+  {
+    "id": "pair18",
+    "person": "p18",
+    "garment": "g15",
+    "tests": "sheer lace dress on older woman"
+  },
+  {
+    "id": "pair19",
+    "person": "p19",
+    "garment": "g02",
+    "tests": "crop tank on half-body shot with arms crossed"
+  },
+  {
+    "id": "pair20",
+    "person": "p20",
+    "garment": "g20",
+    "tests": "skirt partly hidden in reference, side-profile person"
+  }
+]

@@ -1,0 +1,264 @@
+<title>VTO Blind Rating</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: a contact-sheet bench. One row per test pair: inputs on the left, anonymised outputs to the right, rating strips under each output. */
+:root {
+  --bg: #f3f4f2;
+  --surface: #ffffff;
+  --ink: #1b1d1c;
+  --muted: #6a6f6c;
+  --line: #d9dcd8;
+  --accent: #2b5d8a;
+  --accent-soft: #dbe6f0;
+  --bad: #b3261e;
+  --bad-soft: #f6dcda;
+  --good: #2f7a4b;
+  --font-ui: "Schibsted Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-data: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #141716; --surface: #1d2120; --ink: #e8ebe9; --muted: #9aa19d; --line: #333937;
+    --accent: #7fb0dc; --accent-soft: #23384b; --bad: #f08a82; --bad-soft: #43201e; --good: #7cc89a;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #141716; --surface: #1d2120; --ink: #e8ebe9; --muted: #9aa19d; --line: #333937;
+  --accent: #7fb0dc; --accent-soft: #23384b; --bad: #f08a82; --bad-soft: #43201e; --good: #7cc89a;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font-ui); font-size: 14px; line-height: 1.45; padding-inline: 16px; padding-block: 0 48px; }
+.wrap { max-width: 1400px; margin: 0 auto; display: grid; gap: 20px; }
+h1, h2 { text-wrap: balance; margin: 0; }
+h1 { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.01em; }
+h2 { font-size: 1rem; font-weight: 700; }
+.mono { font-family: var(--font-data); font-variant-numeric: tabular-nums; }
+.muted { color: var(--muted); }
+.label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); font-weight: 500; }
+
+header.bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); border-bottom: 1px solid var(--line); padding-block: 14px; display: flex; flex-wrap: wrap; gap: 12px 24px; align-items: center; justify-content: space-between; }
+.meta { display: flex; flex-wrap: wrap; gap: 6px 16px; align-items: baseline; }
+.progress { display: flex; align-items: center; gap: 10px; }
+.meter { width: 140px; height: 6px; background: var(--line); border-radius: 3px; overflow: hidden; }
+.meter > i { display: block; height: 100%; background: var(--accent); width: 0; transition: width .2s; }
+.actions { display: flex; gap: 8px; flex-wrap: wrap; }
+button { font: inherit; cursor: pointer; border-radius: 6px; }
+.btn { border: 1px solid var(--line); background: var(--surface); color: var(--ink); padding: 7px 12px; font-weight: 500; }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--surface); }
+button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.guide { color: var(--muted); max-width: 75ch; }
+.guide b { color: var(--ink); font-weight: 500; }
+
+.summary { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 16px; display: grid; gap: 12px; }
+.tablewrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 0.85rem; }
+th, td { text-align: right; padding: 7px 10px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+th:first-child, td:first-child { text-align: left; }
+th { font-weight: 500; color: var(--muted); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; }
+
+.pair { display: grid; grid-template-columns: minmax(180px, 230px) 1fr; gap: 16px; padding-block: 20px; border-top: 1px solid var(--line); }
+.pair-head { display: grid; gap: 10px; align-content: start; min-width: 0; }
+.inputs { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.inputs figure { margin: 0; display: grid; gap: 4px; }
+.inputs img, .out img { width: 100%; border-radius: 4px; background: var(--line); cursor: zoom-in; display: block; }
+.inputs img { aspect-ratio: 3 / 4; object-fit: cover; }
+.tests { font-size: 0.85rem; }
+.outs { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; min-width: 0; }
+.out { display: grid; gap: 8px; align-content: start; min-width: 0; }
+.out-top { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+.letter { font-family: var(--font-data); font-weight: 600; font-size: 1rem; }
+.reveal-tag { font-size: 0.75rem; color: var(--accent); text-align: right; }
+.out img { max-height: 520px; object-fit: contain; }
+.failed { border: 1px dashed var(--bad); color: var(--bad); background: var(--bad-soft); border-radius: 4px; padding: 16px; font-size: 0.8rem; min-height: 120px; }
+
+.dims { display: grid; gap: 4px; }
+.dim { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 8px; }
+.dim span { font-size: 0.78rem; color: var(--muted); }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 6px; overflow: hidden; }
+.seg button { border: 0; border-radius: 0; background: var(--surface); color: var(--muted); width: 28px; height: 26px; font-family: var(--font-data); font-size: 0.8rem; }
+.seg button + button { border-left: 1px solid var(--line); }
+.seg button[aria-pressed="true"] { background: var(--accent); color: var(--surface); font-weight: 600; }
+.unusable { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.unusable button { border: 1px solid var(--line); background: var(--surface); color: var(--muted); padding: 4px 10px; font-size: 0.78rem; }
+.unusable button[aria-pressed="true"] { background: var(--bad-soft); border-color: var(--bad); color: var(--bad); font-weight: 500; }
+.out.done .letter::after { content: " ✓"; color: var(--good); font-size: 0.85rem; }
+
+dialog { border: 0; padding: 0; background: transparent; max-width: 96vw; max-height: 96vh; }
+dialog::backdrop { background: rgb(0 0 0 / 0.8); }
+dialog img { max-width: 96vw; max-height: 92vh; display: block; border-radius: 4px; }
+.toast { position: fixed; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); left: 50%; transform: translateX(-50%); background: var(--ink); color: var(--bg); padding: 8px 14px; border-radius: 6px; font-size: 0.85rem; }
+textarea#copyfallback { width: 100%; height: 120px; font-family: var(--font-data); font-size: 0.75rem; background: var(--surface); color: var(--ink); border: 1px solid var(--line); border-radius: 6px; }
+
+@media (max-width: 640px) {
+  .pair { grid-template-columns: 1fr; }
+  .inputs { grid-template-columns: 1fr 1fr; max-width: 360px; }
+  .meter { width: 90px; }
+}
+@media (prefers-reduced-motion: reduce) { .meter > i { transition: none; } }
+</style>
+
+<div class="wrap">
+  <header class="bar">
+    <div class="meta">
+      <h1>VTO Blind Rating</h1>
+      <span class="mono muted" id="runinfo"></span>
+    </div>
+    <div class="progress"><span class="mono" id="progresstext">0 / 0 rated</span><div class="meter"><i id="meterfill"></i></div></div>
+    <div class="actions">
+      <button class="btn" id="revealbtn" type="button">Reveal models</button>
+      <button class="btn primary" id="copybtn" type="button">Copy ratings</button>
+    </div>
+  </header>
+
+  <p class="guide">Each row shows the person (image 1) and the garment (image 2), followed by the model outputs in shuffled order. Rate each output from 1 (bad) to 5 (perfect) on <b>Garment</b> (colour, print, cut and length match the product), <b>Identity</b> (face, hair, skin and body unchanged), <b>Scene</b> (pose, background, lighting and other clothing unchanged), <b>Fit</b> (drape, folds and occlusion look real) and <b>Artifacts</b> (5 means none). Mark an output <b>Unusable</b> if you couldn't show it to a customer. Click an image to see it larger. Ratings are saved in this browser only. When you're done, press Copy ratings and paste the result back to Claude.</p>
+
+  <textarea id="copyfallback" hidden readonly></textarea>
+
+  <section class="summary" id="summary" hidden>
+    <h2>Models</h2>
+    <div class="tablewrap"><table id="stats"></table></div>
+  </section>
+
+  <main id="pairs"></main>
+</div>
+
+<dialog id="zoom"><img id="zoomimg" alt=""></dialog>
+<div class="toast" id="toast" hidden></div>
+
+<script>
+const DATA = /*__DATA__*/null;
+const DIMS = [["garment", "Garment"], ["identity", "Identity"], ["scene", "Scene"], ["fit", "Fit"], ["artifacts", "Artifacts"]];
+const KEY = `vto-ratings:${DATA.run}:${DATA.prompt_version}`;
+let ratings = {};
+try { ratings = JSON.parse(localStorage.getItem(KEY) || "{}"); } catch (e) { ratings = {}; }
+let revealed = false;
+try { revealed = localStorage.getItem(KEY + ":revealed") === "1"; } catch (e) {}
+
+const save = () => { try { localStorage.setItem(KEY, JSON.stringify(ratings)); } catch (e) {} };
+const el = (tag, attrs = {}, ...kids) => {
+  const n = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs)) {
+    if (k === "class") n.className = v; else if (k.startsWith("on")) n.addEventListener(k.slice(2), v); else n.setAttribute(k, v);
+  }
+  for (const k of kids.flat()) if (k != null) n.append(k);
+  return n;
+};
+const short = (m) => m.split("/")[1];
+const rid = (pair, model) => `${pair}:${model}`; // keyed by model so adding a model never moves ratings
+const isDone = (r) => r && (r.unusable || DIMS.every(([d]) => r[d]));
+
+document.getElementById("runinfo").textContent = `run ${DATA.run} · prompt ${DATA.prompt_version} · ${DATA.cards.length} pairs`;
+
+function toast(msg) {
+  const t = document.getElementById("toast");
+  t.textContent = msg; t.hidden = false;
+  clearTimeout(toast.t); toast.t = setTimeout(() => (t.hidden = true), 1800);
+}
+
+function zoom(src) {
+  document.getElementById("zoomimg").src = src;
+  document.getElementById("zoom").showModal();
+}
+document.getElementById("zoom").addEventListener("click", (e) => e.currentTarget.close());
+
+function renderOut(card, o) {
+  const id = rid(card.pair, o.model);
+  const r = ratings[id] || {};
+  const box = el("div", { class: "out" + (isDone(r) || !o.ok ? " done" : "") });
+  const tag = el("div", { class: "reveal-tag mono" });
+  if (revealed) tag.textContent = `${short(o.model)} · ${o.latency ?? "–"}s · ${o.cost != null ? "$" + o.cost.toFixed(3) : "–"}`;
+  box.append(el("div", { class: "out-top" }, el("span", { class: "letter" }, o.label), tag));
+  if (!o.ok) {
+    box.append(el("div", { class: "failed" }, "No image returned. ", revealed ? o.error : "Counts as unusable."));
+    return box;
+  }
+  box.append(el("img", { src: o.img, alt: `Output ${o.label} for ${card.pair}`, loading: "lazy", onclick: () => zoom(o.img) }));
+  const dims = el("div", { class: "dims" });
+  for (const [d, name] of DIMS) {
+    const seg = el("div", { class: "seg", role: "group", "aria-label": `${name} rating for output ${o.label}` });
+    for (let v = 1; v <= 5; v++) {
+      seg.append(el("button", { type: "button", id: `${id}:${d}:${v}`, "aria-pressed": String(r[d] === v), onclick: () => {
+        ratings[id] = { ...(ratings[id] || {}), [d]: v }; save(); render();
+      } }, String(v)));
+    }
+    dims.append(el("div", { class: "dim" }, el("span", {}, name), seg));
+  }
+  dims.append(el("div", { class: "unusable" }, el("span", { class: "label" }, "Verdict"),
+    el("button", { type: "button", id: `${id}:unusable`, "aria-pressed": String(!!r.unusable), onclick: () => {
+      ratings[id] = { ...(ratings[id] || {}), unusable: !(ratings[id] || {}).unusable }; save(); render();
+    } }, "Unusable")));
+  box.append(dims);
+  return box;
+}
+
+function renderStats() {
+  const t = document.getElementById("stats");
+  const per = {};
+  for (const c of DATA.cards) for (const o of c.outputs) {
+    const r = ratings[rid(c.pair, o.model)];
+    const p = (per[o.model] ||= { n: 0, unusable: 0, sums: {}, rated: 0 });
+    p.n++;
+    if (!o.ok || (r && r.unusable)) p.unusable++;
+    if (r && DIMS.every(([d]) => r[d])) { p.rated++; for (const [d] of DIMS) p.sums[d] = (p.sums[d] || 0) + r[d]; }
+  }
+  const f = (v, d = 1) => (v == null ? "–" : v.toFixed(d));
+  const head = ["Model", "OK", "p50 s", "p90 s", "Max s", "$ / image", "Rated", ...DIMS.map(([, n]) => n), "Mean", "Usable"];
+  t.replaceChildren(el("tr", {}, head.map((h) => el("th", {}, h))));
+  for (const s of DATA.stats) {
+    const p = per[s.model] || { n: 0, unusable: 0, sums: {}, rated: 0 };
+    const means = DIMS.map(([d]) => (p.rated ? p.sums[d] / p.rated : null));
+    const mean = p.rated ? means.reduce((a, b) => a + b, 0) / means.length : null;
+    t.append(el("tr", { class: "mono" },
+      el("td", {}, s.model), el("td", {}, `${s.ok}/${s.calls}`), el("td", {}, f(s.p50)), el("td", {}, f(s.p90)), el("td", {}, f(s.max)),
+      el("td", {}, s.cost_mean != null ? "$" + s.cost_mean.toFixed(4) : "–"), el("td", {}, `${p.rated}/${p.n}`),
+      means.map((m) => el("td", {}, f(m, 2))), el("td", {}, f(mean, 2)),
+      el("td", {}, p.n ? `${Math.round(100 * (1 - p.unusable / p.n))}%` : "–")));
+  }
+}
+
+function render() {
+  const root = document.getElementById("pairs");
+  root.replaceChildren(...DATA.cards.map((c) => el("section", { class: "pair", id: c.pair },
+    el("div", { class: "pair-head" },
+      el("div", { class: "out-top" }, el("h2", { class: "mono" }, c.pair)),
+      el("div", { class: "inputs" },
+        el("figure", {}, el("img", { src: c.person, alt: "Person", onclick: () => zoom(c.person) }), el("figcaption", { class: "label" }, "1 · Person")),
+        el("figure", {}, el("img", { src: c.garment, alt: c.garment_desc, onclick: () => zoom(c.garment) }), el("figcaption", { class: "label" }, "2 · Garment"))),
+      el("div", { class: "tests" }, el("div", {}, c.garment_desc), el("div", { class: "muted" }, "Tests: " + c.tests))),
+    el("div", { class: "outs" }, c.outputs.map((o) => renderOut(c, o))))));
+  const total = DATA.cards.reduce((n, c) => n + c.outputs.filter((o) => o.ok).length, 0);
+  const done = DATA.cards.reduce((n, c) => n + c.outputs.filter((o) => o.ok && isDone(ratings[rid(c.pair, o.model)])).length, 0);
+  document.getElementById("progresstext").textContent = `${done} / ${total} rated`;
+  document.getElementById("meterfill").style.width = total ? `${(100 * done) / total}%` : "0";
+  document.getElementById("summary").hidden = !revealed;
+  document.getElementById("revealbtn").textContent = revealed ? "Hide models" : "Reveal models";
+  if (revealed) renderStats();
+}
+
+document.getElementById("revealbtn").addEventListener("click", () => {
+  revealed = !revealed;
+  try { localStorage.setItem(KEY + ":revealed", revealed ? "1" : "0"); } catch (e) {}
+  render();
+});
+
+document.getElementById("copybtn").addEventListener("click", () => {
+  const rows = [];
+  for (const c of DATA.cards) for (const o of c.outputs) {
+    const r = ratings[rid(c.pair, o.model)];
+    rows.push({ pair: c.pair, model: o.model, ok: o.ok, ...(r || {}) });
+  }
+  const text = JSON.stringify({ run: DATA.run, prompt_version: DATA.prompt_version, ratings: rows });
+  const fb = document.getElementById("copyfallback");
+  const fallback = () => { fb.value = text; fb.hidden = false; fb.select(); toast("Copy the selected text below"); };
+  try {
+    navigator.clipboard.writeText(text).then(() => toast("Ratings copied"), fallback);
+  } catch (e) { fallback(); }
+});
+
+render();
+</script>

@@ -1,0 +1,13 @@
+.env
+.env.local
+node_modules/
+__pycache__/
+.DS_Store
+
+# Downloaded from Unsplash by scripts/fetch-dataset.mjs; not redistributed
+dataset/garments/
+dataset/people/
+
+# Raw model outputs, grading sheets and HTML reports. These contain edited images
+# of real people, so they stay local.
+runs/

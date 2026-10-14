@@ -1,0 +1,16 @@
+{
+  "name": "vto-eval",
+  "version": "0.1.0",
+  "description": "Cost, latency and quality eval of OpenRouter image models for virtual try-on",
+  "type": "module",
+  "private": true,
+  "license": "MIT",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "fetch-dataset": "node scripts/fetch-dataset.mjs",
+    "run": "node run.mjs",
+    "rating-page": "python3 scripts/rating_page.py",
+    "grading-sheets": "python3 scripts/grading_sheets.py",
+    "summarize": "python3 scripts/summarize.py"
+  }
+}

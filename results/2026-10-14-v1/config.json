@@ -1,0 +1,34 @@
+{
+  "prompt_version": "v1",
+  "models": [
+    "google/gemini-3.1-flash-lite-image",
+    "bytedance-seed/seedream-5-0-flash",
+    "tencent/hy-image-v3.5-preview",
+    "black-forest-labs/flux-3-image",
+    "black-forest-labs/flux.2-klein-4b"
+  ],
+  "pairs": [
+    "pair01",
+    "pair02",
+    "pair03",
+    "pair04",
+    "pair05",
+    "pair06",
+    "pair07",
+    "pair08",
+    "pair09",
+    "pair10",
+    "pair11",
+    "pair12",
+    "pair13",
+    "pair14",
+    "pair15",
+    "pair16",
+    "pair17",
+    "pair18",
+    "pair19",
+    "pair20"
+  ],
+  "repeat": 1,
+  "started": "2026-10-14T09:11:14.786Z"
+}

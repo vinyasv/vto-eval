@@ -1,0 +1,51 @@
+{
+  "_note": "Candidates on OpenRouter as of 2026-10-14. Each must accept 2 images + a text prompt in one request. api: \"images\" means the model is only served on /api/v1/images, not chat/completions.",
+  "candidates": [
+    {
+      "id": "google/gemini-3.1-flash-lite-image",
+      "name": "Gemini 3.1 Flash Lite Image",
+      "multi_image_input": "yes, up to 14 reference images (stated on the OpenRouter model page)",
+      "list_price": "$0.25/M input, $30/M image output (~$0.034/image)",
+      "bench_p50_latency_s": 3.0,
+      "notes": "Output fixed at 1K; supports seed + aspect ratio via image_config; returns text alongside the image"
+    },
+    {
+      "id": "bytedance-seed/seedream-5-0-flash",
+      "name": "Seedream 5.0 Flash",
+      "multi_image_input": "yes, up to 14 reference images (stated on the OpenRouter model page)",
+      "list_price": "from $0.018/image",
+      "bench_p50_latency_s": null,
+      "notes": "Released 2026-10-02, no OpenRouter benchmark yet; no seed parameter, so outputs are not reproducible"
+    },
+    {
+      "id": "tencent/hy-image-v3.5-preview",
+      "name": "Hy Image 3.5 Preview",
+      "api": "images",
+      "multi_image_input": "yes, up to 20 reference images (stated on the OpenRouter model page)",
+      "list_price": "$1.60/M image tokens (per-image cost unknown until measured)",
+      "bench_p50_latency_s": null,
+      "notes": "Released 2026-10-06 as a PREVIEW, so expect changes and rate limits before GA; no benchmark yet; 80B MoE, marketed for subject consistency across edits; output up to 4K; OpenRouter lists no tunable parameters (no seed, no temperature)"
+    },
+    {
+      "id": "black-forest-labs/flux-3-image",
+      "name": "FLUX.3 Image",
+      "api": "images",
+      "multi_image_input": "yes, up to 10 reference images (input_references 0-10 on the Images API)",
+      "list_price": "from $0.041/image",
+      "bench_p50_latency_s": null,
+      "notes": "BFL flagship, released 2026-10-02; resolution 768/1K/1.5K/2K/4K; no seed parameter on OpenRouter"
+    },
+    {
+      "id": "black-forest-labs/flux.2-klein-4b",
+      "name": "FLUX.2 Klein 4B",
+      "api": "images",
+      "multi_image_input": "yes, up to 4 reference images (input_references 0-4 on the Images API)",
+      "list_price": "$0.014/megapixel",
+      "bench_p50_latency_s": 4.0,
+      "notes": "Smallest, fastest FLUX.2; no resolution parameter (output ~1MP); no 4:5 aspect, so 4:5 inputs snap to 3:4"
+    }
+  ],
+  "dropped": {
+    "meta/muse-image": "too slow (~16.5s p50 on text-to-image)"
+  }
+}

@@ -1,0 +1,639 @@
+{
+  "license": "Images are not redistributed. scripts/fetch-dataset.mjs downloads them from Unsplash (Unsplash License). crop is [x, y, w, h] in original pixels.",
+  "garments": [
+    {
+      "id": "g01",
+      "category": "top",
+      "description": "striped tee",
+      "image_format": "on-model crop",
+      "file": "dataset/garments/g01.jpg",
+      "unsplash_id": "O0Gl7rmcYV8",
+      "source": "https://unsplash.com/photos/O0Gl7rmcYV8",
+      "author": "engin akyurt",
+      "license": "Unsplash License",
+      "image_url": "https://images.unsplash.com/photo-1789110853752-17180c702275",
+      "original_size": [
+        3593,
+        5389
+      ]
+    },
+    {
+      "id": "g02",
+      "category": "top",
+      "description": "pink racerback crop tank",
+      "image_format": "on-model crop",
+      "file": "dataset/garments/g02.jpg",
+      "unsplash_id": "AcpJXpQi0V8",
+      "source": "https://unsplash.com/photos/AcpJXpQi0V8",
+      "author": "engin akyurt",
+      "license": "Unsplash License",
+      "image_url": "https://images.unsplash.com/photo-1789110520630-71658af7ba7d",
+      "original_size": [
+        4480,
+        6253
+      ]
+    },
+    {
+      "id": "g03",
+      "category": "top",
+      "description": "black graphic tee, \"705\" logo",
+      "image_format": "hanger",
+      "file": "dataset/garments/g03.jpg",
+      "unsplash_id": "u6n1HrW0sdQ",
+      "source": "https://unsplash.com/photos/u6n1HrW0sdQ",
+      "author": "Ryan Hoffman",
+      "license": "Unsplash License",
+      "image_url": "https://images.unsplash.com/photo-1618354691438-25bc04584c23",
+      "original_size": [
+        2028,
+        2839
+      ]
+    },
+    {
+      "id": "g04",
+      "category": "top",
+      "description": "white tee with vertical text print",
+      "image_format": "flat lay",
+      "file": "dataset/garments/g04.jpg",
+      "unsplash_id": "GTQxKTXBjyY",
+      "source": "https://unsplash.com/photos/GTQxKTXBjyY",
+      "author": "DJ Tears PLK",
+      "license": "Unsplash License",
+      "image_url": "https://images.unsplash.com/photo-1729696157994-b884c669b682",
+      "original_size": [
+        3456,
+        5184
+      ]
+    },
+    {
+      "id": "g05",
+      "category": "top",
+      "description": "sheer black chiffon blouse",
+      "image_format": "on-model",
+      "file": "dataset/garments/g05.jpg",
+      "unsplash_id": "uQ-Jc5uSMaQ",
+      "source": "https://unsplash.com/photos/uQ-Jc5uSMaQ",
+      "author": "Shane Ryan Herilalaina",
+      "license": "Unsplash License",
+      "image_url": "https://images.unsplash.com/photo-1764168840124-99f6990b55fb",
+      "original_size": [
+        5304,
+        7952
+      ]
+    },
+    {
+      "id": "g06",
+      "category": "top",
+      "description": "white short-sleeve button shirt",
+      "image_format": "hanger, cluttered bg",
+      "file": "dataset/garments/g06.jpg",
+      "unsplash_id": "ve2dwNxZ5Rg",
+      "source": "https://unsplash.com/photos/ve2dwNxZ5Rg",
+      "author": "Lisanto \u674e\u5955\u826f",
+      "license": "Unsplash License",
+      "image_url": "https://images.unsplash.com/photo-1621773881532-fe65715b5137",
+      "original_size": [
+        3376,
+        6000
+      ]
+    },
+    {
+      "id": "g07",
+      "category": "top",
+      "description": "fair-isle sweater vest",
+      "image_format": "hanger, layered over shirt",
+      "file": "dataset/garments/g07.jpg",
+      "unsplash_id": "70pnnvRhRl0",
+      "source": "https://unsplash.com/photos/70pnnvRhRl0",
+      "author": "atelierbyvineeth ...",
+      "license": "Unsplash License",
+      "image_url": "https://images.unsplash.com/photo-1776864045728-c5f12a12c390",
+      "original_size": [
+        6240,
+        4160
+      ],
+      "crop": [
+        3120,
+        124,
+        2371,
+        3910
+      ]
+    },
+    {
+      "id": "g08",
+      "category": "top",
+      "description": "white pullover hoodie",
+      "image_format": "hanger",
+      "file": "dataset/garments/g08.jpg",
+      "unsplash_id": "kJXGTOY1wLQ",
+      "source": "https://unsplash.com/photos/kJXGTOY1wLQ",
+      "author": "Mediamodifier",
+      "license": "Unsplash License",
+      "image_url": "https://images.unsplash.com/photo-1620799140188-3b2a02fd9a77",
+      "original_size": [
+        5536,
+        4160
+      ]
+    },
+    {
+      "id": "g09",
+      "category": "outerwear",
+      "description": "denim trucker jacket, corduroy collar",
+      "image_format": "hanger, dark bg",
+      "file": "dataset/garments/g09.jpg",
+      "unsplash_id": "QRN47la37gw",
+      "source": "https://unsplash.com/photos/QRN47la37gw",
+      "author": "Caio Coelho",
+      "license": "Unsplash License",
+      "image_url": "https://images.unsplash.com/photo-1611312449408-fcece27cdbb7",
+      "original_size": [
+        2216,
+        3489
+      ]
+    },
+    {
+      "id": "g10",
+      "category": "outerwear",
+      "description": "black leather moto jacket",
+      "image_format": "flat on bed, wrinkled",
+      "file": "dataset/garments/g10.jpg",
+      "unsplash_id": "L-C6XbKgw-s",
+      "source": "https://unsplash.com/photos/L-C6XbKgw-s",
+      "author": "Anna Evans",
+      "license": "Unsplash License",
+      "image_url": "https://images.unsplash.com/photo-1727519366940-fd9b926e362e",
+      "original_size": [
+        3472,
+        4624
+      ]
+    },
+    {
+      "id": "g11",
+      "category": "outerwear",
+      "description": "navy shawl-collar tuxedo blazer",
+      "image_format": "hanger",
+      "file": "dataset/garments/g11.jpg",
+      "unsplash_id": "LkR6zTayf-o",
+      "source": "https://unsplash.com/photos/LkR6zTayf-o",
+      "author": "Vetrivel Viswanathar",
+      "license": "Unsplash License",
+      "image_url": "https://images.unsplash.com/photo-1667283831517-5b747b3c17c8",
+      "original_size": [
+        4480,
+        6720
+      ]
+    },
+    {
+      "id": "g12",
+      "category": "outerwear",
+      "description": "camel overcoat",
+      "image_format": "on-model full body",
+      "file": "dataset/garments/g12.jpg",
+      "unsplash_id": "sWx6O6f8S3E",
+      "source": "https://unsplash.com/photos/sWx6O6f8S3E",
+      "author": "Peter Chirkov",
+      "license": "Unsplash License",
+      "image_url": "https://images.unsplash.com/photo-1665832102183-b232574131ff",
+      "original_size": [
+        5100,
+        2870
+      ],
+      "crop": [
+        1836,
+        57,
+        1530,
+        2783
+      ]
+    },
+    {
+      "id": "g13",
+      "category": "dress",
+      "description": "mustard sleeveless shirt dress",
+      "image_format": "on-model crop",
+      "file": "dataset/garments/g13.jpg",
+      "unsplash_id": "oj5vw4vMGl8",
+      "source": "https://unsplash.com/photos/oj5vw4vMGl8",
+      "author": "engin akyurt",
+      "license": "Unsplash License",
+      "image_url": "https://images.unsplash.com/photo-1789111161016-795db6925e99",
+      "original_size": [
+        3729,
+        5593
+      ]
+    },
+    {
+      "id": "g14",
+      "category": "dress",
+      "description": "sage spaghetti-strap midi dress",
+      "image_format": "on-model, back view",
+      "file": "dataset/garments/g14.jpg",
+      "unsplash_id": "UbrPTBBxaE8",
+      "source": "https://unsplash.com/photos/UbrPTBBxaE8",
+      "author": "engin akyurt",
+      "license": "Unsplash License",
+      "image_url": "https://images.unsplash.com/photo-1789110519607-6176d668fb72",
+      "original_size": [
+        3886,
+        5828
+      ]
+    },
+    {
+      "id": "g15",
+      "category": "dress",
+      "description": "white lace long-sleeve dress",
+      "image_format": "hanger, sheer lace",
+      "file": "dataset/garments/g15.jpg",
+      "unsplash_id": "C0j_IxemcLo",
+      "source": "https://unsplash.com/photos/C0j_IxemcLo",
+      "author": "Nathan Walker",
+      "license": "Unsplash License",
+      "image_url": "https://images.unsplash.com/photo-1604531825858-a8e24ed6b43d",
+      "original_size": [
+        3000,
+        4500
+      ]
+    },
+    {
+      "id": "g16",
+      "category": "dress",
+      "description": "red tea dress",
+      "image_format": "mannequin, busy street bg",
+      "file": "dataset/garments/g16.jpg",
+      "unsplash_id": "dLovy0ESXoI",
+      "source": "https://unsplash.com/photos/dLovy0ESXoI",
+      "author": "atelierbyvineeth ...",
+      "license": "Unsplash License",
+      "image_url": "https://images.unsplash.com/photo-1772571157276-a76fa80f2a1a",
+      "original_size": [
+        4160,
+        6240
+      ]
+    },
+    {
+      "id": "g17",
+      "category": "jumpsuit",
+      "description": "olive wide-leg jumpsuit",
+      "image_format": "on-model, back view",
+      "file": "dataset/garments/g17.jpg",
+      "unsplash_id": "1W8epaKGscU",
+      "source": "https://unsplash.com/photos/1W8epaKGscU",
+      "author": "engin akyurt",
+      "license": "Unsplash License",
+      "image_url": "https://images.unsplash.com/photo-1789110519915-7548f7e2c0d8",
+      "original_size": [
+        4480,
+        6720
+      ]
+    },
+    {
+      "id": "g18",
+      "category": "bottom",
+      "description": "red wide-leg trousers",
+      "image_format": "on-model crop",
+      "file": "dataset/garments/g18.jpg",
+      "unsplash_id": "WroHMbuh3Mg",
+      "source": "https://unsplash.com/photos/WroHMbuh3Mg",
+      "author": "engin akyurt",
+      "license": "Unsplash License",
+      "image_url": "https://images.unsplash.com/photo-1789110853487-b886411f11cb",
+      "original_size": [
+        3732,
+        5597
+      ]
+    },
+    {
+      "id": "g19",
+      "category": "bottom",
+      "description": "black slim jeans",
+      "image_format": "folded flat lay",
+      "file": "dataset/garments/g19.jpg",
+      "unsplash_id": "h6PKsr0wDH4",
+      "source": "https://unsplash.com/photos/h6PKsr0wDH4",
+      "author": "TuanAnh Blue",
+      "license": "Unsplash License",
+      "image_url": "https://images.unsplash.com/photo-1718252540511-e958742e4165",
+      "original_size": [
+        3296,
+        3296
+      ]
+    },
+    {
+      "id": "g20",
+      "category": "bottom",
+      "description": "pink embroidered mini skirt",
+      "image_format": "on-model, partially covered",
+      "file": "dataset/garments/g20.jpg",
+      "unsplash_id": "jYdRUFgba8k",
+      "source": "https://unsplash.com/photos/jYdRUFgba8k",
+      "author": "Tamara Bellis",
+      "license": "Unsplash License",
+      "image_url": "https://images.unsplash.com/photo-1507274301514-7de9f124ff54",
+      "original_size": [
+        6016,
+        4000
+      ]
+    }
+  ],
+  "people": [
+    {
+      "id": "p01",
+      "presentation": "M",
+      "notes": "studio, full body, front, tee + shorts",
+      "file": "dataset/people/p01.jpg",
+      "unsplash_id": "13eaC9bFjGQ",
+      "source": "https://unsplash.com/photos/13eaC9bFjGQ",
+      "author": "Praise Judah",
+      "license": "Unsplash License",
+      "image_url": "https://images.unsplash.com/photo-1763750581767-b367bcd6c117",
+      "original_size": [
+        4000,
+        5000
+      ]
+    },
+    {
+      "id": "p02",
+      "presentation": "M",
+      "notes": "street, full body, hands in pockets",
+      "file": "dataset/people/p02.jpg",
+      "unsplash_id": "hyy3Lrv5WdM",
+      "source": "https://unsplash.com/photos/hyy3Lrv5WdM",
+      "author": "Muhammad Numan",
+      "license": "Unsplash License",
+      "image_url": "https://images.unsplash.com/photo-1763610452422-a24873594a0b",
+      "original_size": [
+        3840,
+        5760
+      ]
+    },
+    {
+      "id": "p03",
+      "presentation": "M",
+      "notes": "street, full body, oversized tee + wide jeans",
+      "file": "dataset/people/p03.jpg",
+      "unsplash_id": "F5uC79jBMDk",
+      "source": "https://unsplash.com/photos/F5uC79jBMDk",
+      "author": "mahyar mirghasemi",
+      "license": "Unsplash License",
+      "image_url": "https://images.unsplash.com/photo-1689396959193-5c1f9dece9e1",
+      "original_size": [
+        5104,
+        7266
+      ]
+    },
+    {
+      "id": "p04",
+      "presentation": "M",
+      "notes": "studio, 3/4 body, slight turn",
+      "file": "dataset/people/p04.jpg",
+      "unsplash_id": "sjOeDC7Edqg",
+      "source": "https://unsplash.com/photos/sjOeDC7Edqg",
+      "author": "janilson furtado",
+      "license": "Unsplash License",
+      "image_url": "https://images.unsplash.com/photo-1687960855794-a0c0702eba5d",
+      "original_size": [
+        4160,
+        6240
+      ]
+    },
+    {
+      "id": "p05",
+      "presentation": "M",
+      "notes": "plus size, outdoor, full body",
+      "file": "dataset/people/p05.jpg",
+      "unsplash_id": "ogV4PYrRKME",
+      "source": "https://unsplash.com/photos/ogV4PYrRKME",
+      "author": "Mr. Great Heart",
+      "license": "Unsplash License",
+      "image_url": "https://images.unsplash.com/photo-1649186019808-300eb560c917",
+      "original_size": [
+        3376,
+        6000
+      ]
+    },
+    {
+      "id": "p06",
+      "presentation": "M",
+      "notes": "outdoor, 3/4 body, polo",
+      "file": "dataset/people/p06.jpg",
+      "unsplash_id": "qC7jvmbEmRQ",
+      "source": "https://unsplash.com/photos/qC7jvmbEmRQ",
+      "author": "Fortune Vieyra",
+      "license": "Unsplash License",
+      "image_url": "https://images.unsplash.com/photo-1614890085618-0e1054da74f8",
+      "original_size": [
+        2828,
+        4242
+      ]
+    },
+    {
+      "id": "p07",
+      "presentation": "M",
+      "notes": "studio, full body, slight turn, light jeans",
+      "file": "dataset/people/p07.jpg",
+      "unsplash_id": "U4cPrYNtvXk",
+      "source": "https://unsplash.com/photos/U4cPrYNtvXk",
+      "author": "Anton Polidovets",
+      "license": "Unsplash License",
+      "image_url": "https://images.unsplash.com/photo-1669322477549-e1d4cfcefa58",
+      "original_size": [
+        4000,
+        6000
+      ]
+    },
+    {
+      "id": "p08",
+      "presentation": "M",
+      "notes": "older, seated in armchair",
+      "file": "dataset/people/p08.jpg",
+      "unsplash_id": "_mTWj51j_k4",
+      "source": "https://unsplash.com/photos/_mTWj51j_k4",
+      "author": "Wade Austin Ellis",
+      "license": "Unsplash License",
+      "image_url": "https://images.unsplash.com/photo-1529805059949-9e3d27512bbd",
+      "original_size": [
+        5760,
+        3840
+      ]
+    },
+    {
+      "id": "p09",
+      "presentation": "M",
+      "notes": "studio, full body, clean e-comm style",
+      "file": "dataset/people/p09.jpg",
+      "unsplash_id": "94pAn2wA2WY",
+      "source": "https://unsplash.com/photos/94pAn2wA2WY",
+      "author": "Or Hakim",
+      "license": "Unsplash License",
+      "image_url": "https://images.unsplash.com/photo-1666358080289-2401fbdd53cf",
+      "original_size": [
+        6000,
+        4000
+      ]
+    },
+    {
+      "id": "p10",
+      "presentation": "M",
+      "notes": "dark studio bg, 3/4 body",
+      "file": "dataset/people/p10.jpg",
+      "unsplash_id": "Dddi23xkZGc",
+      "source": "https://unsplash.com/photos/Dddi23xkZGc",
+      "author": "Joseph Okon",
+      "license": "Unsplash License",
+      "image_url": "https://images.unsplash.com/photo-1688990982651-a5d751773eff",
+      "original_size": [
+        2488,
+        3732
+      ]
+    },
+    {
+      "id": "p11",
+      "presentation": "F",
+      "notes": "plus size, studio, full body, mid-gesture",
+      "file": "dataset/people/p11.jpg",
+      "unsplash_id": "ja8Xe5k4S_8",
+      "source": "https://unsplash.com/photos/ja8Xe5k4S_8",
+      "author": "McFollis",
+      "license": "Unsplash License",
+      "image_url": "https://images.unsplash.com/photo-1790502041518-d52fc2374a68",
+      "original_size": [
+        4480,
+        6426
+      ]
+    },
+    {
+      "id": "p12",
+      "presentation": "F",
+      "notes": "studio, full body, blazer, bare legs",
+      "file": "dataset/people/p12.jpg",
+      "unsplash_id": "OLe4vLM_wo4",
+      "source": "https://unsplash.com/photos/OLe4vLM_wo4",
+      "author": "Reza Roshan",
+      "license": "Unsplash License",
+      "image_url": "https://images.unsplash.com/photo-1765044145286-2320351f2f03",
+      "original_size": [
+        6616,
+        6616
+      ]
+    },
+    {
+      "id": "p13",
+      "presentation": "F",
+      "notes": "street, full body, walking toward camera, open blazer",
+      "file": "dataset/people/p13.jpg",
+      "unsplash_id": "a6-tqHToPKo",
+      "source": "https://unsplash.com/photos/a6-tqHToPKo",
+      "author": "Marcel Strau\u00df",
+      "license": "Unsplash License",
+      "image_url": "https://images.unsplash.com/photo-1599330293136-a2026974eafe",
+      "original_size": [
+        3410,
+        5115
+      ]
+    },
+    {
+      "id": "p14",
+      "presentation": "F",
+      "notes": "street, full body, wide trousers",
+      "file": "dataset/people/p14.jpg",
+      "unsplash_id": "tgj1s1MFkjs",
+      "source": "https://unsplash.com/photos/tgj1s1MFkjs",
+      "author": "Ufoma Ojo",
+      "license": "Unsplash License",
+      "image_url": "https://images.unsplash.com/photo-1763256433183-95fcdeabc436",
+      "original_size": [
+        2609,
+        3261
+      ]
+    },
+    {
+      "id": "p15",
+      "presentation": "F",
+      "notes": "hijab, street, full body",
+      "file": "dataset/people/p15.jpg",
+      "unsplash_id": "C3s77g7mibs",
+      "source": "https://unsplash.com/photos/C3s77g7mibs",
+      "author": "Sina Malek",
+      "license": "Unsplash License",
+      "image_url": "https://images.unsplash.com/photo-1754639532963-8a44deaebd87",
+      "original_size": [
+        4160,
+        6240
+      ]
+    },
+    {
+      "id": "p16",
+      "presentation": "F",
+      "notes": "plus size, arms raised in archway",
+      "file": "dataset/people/p16.jpg",
+      "unsplash_id": "UcHB8JSqlXI",
+      "source": "https://unsplash.com/photos/UcHB8JSqlXI",
+      "author": "Lance Reis",
+      "license": "Unsplash License",
+      "image_url": "https://images.unsplash.com/photo-1664893876112-64c308bf0d70",
+      "original_size": [
+        3621,
+        4526
+      ]
+    },
+    {
+      "id": "p17",
+      "presentation": "F",
+      "notes": "saree, full body, interior",
+      "file": "dataset/people/p17.jpg",
+      "unsplash_id": "IHlcNH9bKoA",
+      "source": "https://unsplash.com/photos/IHlcNH9bKoA",
+      "author": "ARTO SURAJ",
+      "license": "Unsplash License",
+      "image_url": "https://images.unsplash.com/photo-1667522240093-c1f441a920eb",
+      "original_size": [
+        4000,
+        6000
+      ]
+    },
+    {
+      "id": "p18",
+      "presentation": "F",
+      "notes": "older, 3/4 body, suit, coloured bg",
+      "file": "dataset/people/p18.jpg",
+      "unsplash_id": "2o4UTvyV53I",
+      "source": "https://unsplash.com/photos/2o4UTvyV53I",
+      "author": "Kamil Kalkan",
+      "license": "Unsplash License",
+      "image_url": "https://images.unsplash.com/photo-1745962978493-26922b426899",
+      "original_size": [
+        12660,
+        8275
+      ]
+    },
+    {
+      "id": "p19",
+      "presentation": "F",
+      "notes": "half body, arms crossed",
+      "file": "dataset/people/p19.jpg",
+      "unsplash_id": "X1IqW2Zu0Lo",
+      "source": "https://unsplash.com/photos/X1IqW2Zu0Lo",
+      "author": "Vitaly Gariev",
+      "license": "Unsplash License",
+      "image_url": "https://images.unsplash.com/photo-1758600587674-1bd7a66bfb24",
+      "original_size": [
+        3840,
+        2160
+      ]
+    },
+    {
+      "id": "p20",
+      "presentation": "F",
+      "notes": "studio, full body, side profile",
+      "file": "dataset/people/p20.jpg",
+      "unsplash_id": "Ql9mE5hMhIo",
+      "source": "https://unsplash.com/photos/Ql9mE5hMhIo",
+      "author": "Anton K Wibowo",
+      "license": "Unsplash License",
+      "image_url": "https://images.unsplash.com/photo-1780566757452-d7c14fb9d0f0",
+      "original_size": [
+        3456,
+        5184
+      ]
+    }
+  ]
+}
